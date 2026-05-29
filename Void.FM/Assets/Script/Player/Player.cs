@@ -4,15 +4,15 @@ namespace Script.Player
 
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private PlayerController playerController;
 
 
         public void Initialize() {
-            _playerMovement.Initialize();
+            playerController.Initialize();
         }
 
         public void Deinitialize() {
-            _playerMovement.Deinitialize();
+            playerController.Deinitialize();
         }
     }
 }

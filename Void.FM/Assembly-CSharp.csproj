@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Global\Common.cs" />
+    <Compile Include="Assets\Script\Player\PlayerController.cs" />
     <Compile Include="Assets\Script\Camera\CameraRotator.cs" />
     <Compile Include="Assets\Settings\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Script\Player\Player.cs" />
