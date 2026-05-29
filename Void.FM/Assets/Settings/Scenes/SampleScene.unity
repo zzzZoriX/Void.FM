@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f63d7bc8c1791488806181a5b8444b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 277208944}
 --- !u!114 &277208944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,11 @@ MonoBehaviour:
   MoveVector: {x: 0, y: 0}
   _rigidbody: {fileID: 277208945}
   _jumpForce: 5
-  _moveSpeed: 10
+  _minMoveSpeed: 0
+  _maxMoveSpeed: 10
+  _accelerationTime: 1.5
+  _decelerationTime: 0.8
+  _currentSpeed: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +732,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

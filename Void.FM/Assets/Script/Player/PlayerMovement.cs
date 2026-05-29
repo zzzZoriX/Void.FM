@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Script.Global;
 
 namespace Script.Player
@@ -9,7 +10,13 @@ namespace Script.Player
         
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private float _jumpForce;
-        [SerializeField] private float _moveSpeed;
+        
+        [Header("Move speed")]
+        [SerializeField] private float _minMoveSpeed;
+        [SerializeField] private float _maxMoveSpeed;
+        [SerializeField] private float _accelerationTime = 2f;
+        [SerializeField] private float _decelerationTime = 2f;
+        [SerializeField] private float _currentSpeed = 0f;
         
         private bool _canJump = true;
 
@@ -17,6 +24,7 @@ namespace Script.Player
         private void Update() {
             Move();
             UpdateCanJumpStatus();
+            MoveSpeedHandler();
         }
 
         public void Jump() {
@@ -27,9 +35,30 @@ namespace Script.Player
 
         private void Move() {
             var horizontalDirection = Common.ConvertV2ToV3(MoveVector, 0f);
-            var targetVelocity = Common.ConvertGlobalToLocal(horizontalDirection).normalized * _moveSpeed;
+            var targetVelocity = Common.ConvertGlobalToLocal(horizontalDirection).normalized * _currentSpeed;
 
             _rigidbody.velocity = new Vector3(targetVelocity.x, _rigidbody.velocity.y, targetVelocity.z);
+        }
+
+        private void MoveSpeedHandler() {
+            if (MoveVector == Vector2.zero) {
+                MoveSpeedDecrease();
+            }
+            else {
+                MoveSpeedIncrease();
+            }
+        }
+
+        private void MoveSpeedIncrease() {
+            var accelerationRate = (_maxMoveSpeed - _minMoveSpeed) / _accelerationTime;
+
+            _currentSpeed = Mathf.MoveTowards(_currentSpeed, _maxMoveSpeed, accelerationRate * Time.deltaTime);
+        }
+
+        private void MoveSpeedDecrease() {
+            var decelerationRate = (_maxMoveSpeed - _minMoveSpeed) / _decelerationTime;
+
+            _currentSpeed = Mathf.MoveTowards(_currentSpeed, _minMoveSpeed, decelerationRate * Time.deltaTime);
         }
 
         private void UpdateCanJumpStatus() {
